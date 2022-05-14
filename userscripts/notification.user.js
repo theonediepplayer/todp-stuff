@@ -9,6 +9,7 @@
 // @grant        none
 // ==/UserScript==
 if (!window.Hook) return;
+if (!window.Hook) alert('You need Diep.io Packet WASM Hook to use this')
 document.addEventListener('keydown', function (event) {
     if (event.key == 'n') {
       Hook.recv(new Uint8Array([3, ...new TextEncoder().encode(`notification :D`), 0, 0, 0, 255, 0, ...new Uint8Array(new Float32Array([2500]).buffer), 65, 0]));
