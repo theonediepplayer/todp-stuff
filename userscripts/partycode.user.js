@@ -8,7 +8,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=diep.io
 // @grant        none
 // ==/UserScript==
-if (!window.Hook) return window.alert('You need Diep.io Packet WASM Hook to use this script. \nDM THE one Diep Player#4734 to get it.');
+if (!window.Hook) return window.alert('You need Diep.io Packet WASM Hook to use this script.');
 function recv(args) {
 Hook.recv(new Uint8Array([args]))
 }
