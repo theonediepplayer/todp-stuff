@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         copy party link (non hook)
 // @namespace    http://tampermonkey.net/
-// @version      1
+// @version      1.1
 // @description  go into the diep console (home) and type game_copy_link
 // @author       todp
 // @match        *://diep.io/*
@@ -12,7 +12,7 @@
  let val;
  let serverID;
  let currentServer = '';
- let console = "";
+ let consol = "";
  let protect = true;
 
     function serverLink(server) {
@@ -30,8 +30,9 @@
     };
 
 function link() {
+    if (currentServer=='') return;
       serverID = serverLink(currentServer.split("://")[1].split("-80.lobby")[0]).toUpperCase();
-      val = `https://diep.io/#${serverID}00`;
+      val = `https://diep.io/#${serverID}`;
 }
 
 setInterval(link, 500);
@@ -40,12 +41,16 @@ unsafeWindow.link = link;
 document.addEventListener("keydown", (kc) => {
     protect = true;
         if (kc.keyCode === 13) {
-             console = document.getElementById('textInput').value;
-            if (console === 'game_copy_link' ) {
+             consol = document.getElementById('textInput').value;
+            if (consol === 'game_copy_link' ) {
                 protect = false;
+                if (currentServer==='') return;
                 navigator.clipboard.writeText(val);
             }
-            if ( protect === false ) {
+            if (protect === false) {
+                if (currentServer==='') {
+                    document.getElementById('textInput').value = "none";
+                                     }
                 document.getElementById('textInput').value = "party,but_server_link_copied!";
             }
         }
